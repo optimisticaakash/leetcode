@@ -1,5 +1,4 @@
-
-approach 1 : by checking the overflow condition before multiply rev by 10
+//approach 1 : by checking overflow condition before multiply rev by 10
 
 class Solution {
 public:
@@ -11,7 +10,7 @@ public:
         while(temp >0){
             int digit = temp%10;
 
-             //check for overflow before multiplying by 10 
+             //check for overflow before multiply by 10 
             if(rev > INT_MAX/10 || (rev == INT_MAX/10 && digit > 7)) return 0;
             if(rev < INT_MIN/10 || (rev == INT_MIN/10 && digit < -8)) return 0;
             rev = rev*10+digit;
@@ -23,18 +22,16 @@ public:
 };
 
 
-Approach 2 : by reverse half the number and check if it equals half of the number
+//Approach 2 : by reverse half the number and check if it equals half of the number
+//In this approach if rev the number by half , it eliminate the chances of overflow  because reversing the whole number could cause overflow 
 
+//so in this approach we reverse the number till original number > reversedhalf
 
-In this approach if rev the number by half , it eliminate the chances of overflow  because reversing the whole number could cause overflow 
+//For even digits: x == reversedHalf
 
-so in this approach we reverse the number till original number > reversedhalf
+//For odd digits: The middle digit doesn't matter (e.g. 12321) → so x == reversedHalf / 10
 
-For even digits: x == reversedHalf
-
-For odd digits: The middle digit doesn't matter (e.g. 12321) → so x == reversedHalf / 10
-
-code:
+//code:
 
 class Solution {
 public:
