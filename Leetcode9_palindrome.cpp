@@ -1,3 +1,24 @@
+//Approach 1 : By using long long
+
+//long long range = 2^63 -1
+//long range = 9.2*10^18
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        int original = x;
+        long long rev = 0;
+
+        if(x < 0) return false;
+        while(original >0){
+            rev = rev*10 + temp%10;
+            temp /= 10;
+        }
+
+        return rev == x;        
+    }
+};
+
+
 //approach 1 : by checking overflow condition before multiply rev by 10
 
 class Solution {
@@ -25,7 +46,7 @@ public:
 //Approach 2 : by reverse half the number and check if it equals half of the number
 //In this approach if rev the number by half , it eliminate the chances of overflow  because reversing the whole number could cause overflow 
 
-//so in this approach we reverse the number till original number > reversedhalf
+//so in this approach we reverse the number till the original number > reversedhalf
 
 //For even digits: x == reversedHalf
 
