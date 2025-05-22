@@ -55,7 +55,8 @@ public:
             return isPalindromeHelper(i , j-1 , s);
         
         if(tolower(s[i]) != tolower(s[j])) return false;
-            return isPalindromeHelper(i+1 , j-1, s);
+        
+        return isPalindromeHelper(i+1 , j-1, s);
     }
     bool isPalindrome(string s) {
         int n = s.size();
