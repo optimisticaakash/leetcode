@@ -1,3 +1,26 @@
+//Approach 1 : using loops 
+class Solution {
+public:
+    int fib(int n) {
+        int a = 0 , b = 1 , c;
+        int count = 2;
+        if(n<=1) return n;
+        while(count <= n){
+            c = a+b;
+            a = b;
+            b = c;
+            count++;
+        }
+        return c;
+    }
+};
+
+//T.C = o(N)
+//S.c = O(1)
+
+
+//Approach 2: using recursion
+
 class Solution {
 public:
     int fib(int n) {
