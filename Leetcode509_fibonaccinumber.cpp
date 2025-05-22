@@ -13,3 +13,5 @@ public:
 //each recursion call calls function 2 time
 
 //space complexity = O(n) deepest recursion stack => f(n) -> f(n-1) -> .....-> f(1) -> f(0)
+
+//This can also be solved by recursion + memorized . do that later
