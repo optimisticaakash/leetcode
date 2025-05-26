@@ -35,6 +35,7 @@ public:
 };
 
 //TimeComplexity: O(n^2)
+//SpaceComplexity : O(n) due to using temp array of size n
 
 //Approach 2 : Binary search 
 class Solution {
@@ -70,21 +71,26 @@ public:
     int maxFrequency(vector<int>& nums, int k) {
         int n = nums.size();
 
-        sort(begin(nums),end(nums));
+        sort(begin(nums),end(nums));//O(nlogn)
         vector<long> prefixSum(n);
         prefixSum[0] = nums[0];
-        for(int i = 1; i < n; i++){
+        for(int i = 1; i < n; i++){//O(n)
             prefixSum[i] = prefixSum[i-1]+nums[i];
         }
 
         int result = 0;
 
-        for(int target_idx = 0; target_idx < n; target_idx++){
-            result = max(result,bSearch(target_idx , k , nums , prefixSum));
+        for(int target_idx = 0; target_idx < n; target_idx++){//n calls ho rhi hai 0 to n-1
+            result = max(result,bSearch(target_idx , k , nums , prefixSum));//and bSeach - O(long)
         }
+        //O(nlogn)
         return result;
     }
 };
+
+//TimeComplexity: O(nlogn + n + nlogn) = O(nlogn)
+//SpcaeComplexity : O(n) prefix array
+
 
 //Approach 3 : sliding window 
 class Solution {
@@ -113,4 +119,7 @@ public:
         return result;
     }
 };
+
+//Timecomplexity: O(2N)= O(n) dono loop  milar ek element ko 2 bar hi iterate kr rhe hai 
+//spaceComplexity : O(1) except sorting 
 //And this same code can be submit by using if instead of while 
