@@ -35,8 +35,15 @@ public:
             x/=10;
 
             //check for overflow before multiply by 10 
-            if(rev > INT_MAX/10 || (rev == INT_MAX/10 && digit > 7)) return 0;
+             if(rev > INT_MAX/10 || (rev == INT_MAX/10 && digit > 7)) return 0;
             if(rev < INT_MIN/10 || (rev == INT_MIN/10 && digit < -8)) return 0;
+
+            /*Let's say rev == 214748364, which is INT_MAX / 10.
+                If you multiply rev * 10, you get 2147483640.
+                Now you want to add digit.
+                If digit > 7, the total becomes more than 2,147,483,647 — that’s overflow!
+                So you must prevent that.
+            */
 
             rev = rev *10 + digit;
 
