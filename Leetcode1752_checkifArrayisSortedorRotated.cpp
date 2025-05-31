@@ -73,3 +73,38 @@ public:
 //TC= O(N^2)
 //SC = O(N)
 
+//Approach 2 : in this approach given array ko phle sorte krnege 
+//then usko rotate krenge for every possible rotation
+//  sorted array ko rotate kreke kisi bhi rotation ke baad 
+//agar woh orignal nums ke equal nhi aaya to mtlb  humari given array originally sorted nhi hai 
+
+//NOTE :- approach 1 ka logic bas reversed hai 
+
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> sorted = nums;
+        //sort(sorted.begin(),sorted.end()); -> we can also write like this
+        sort(begin(sorted) , end(sorted));
+
+        for(int r = 0; r < n; r++){
+            //check all the possible rotation of sorted array
+            // then if it match with given array nums, return true
+            bool isSorted = true;
+            for(int i = 0; i < n; i++){
+                if(sorted[i] != nums[(i+r)%n]){
+                    isSorted = false;
+                    break;
+                }
+            }
+
+            //check if isSorted is true or not
+            if(isSorted == true) return true;
+        }
+
+        return false;
+    }
+};
+
