@@ -59,3 +59,26 @@ public:
 
 //T.C : O(n)
 //S.C : O(1)
+
+
+//Alternative code of same approach 
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int n = nums.size();
+        int currentans = 0;
+        int finalans = 0;
+
+        for(int i = 0; i < n; i++){
+            if(nums[i]== 1){
+                currentans++;
+            }else{
+                currentans = 0;
+            }
+
+            finalans = max(finalans,currentans);
+        }
+
+        return finalans;
+    }
+};
