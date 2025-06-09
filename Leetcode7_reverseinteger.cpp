@@ -1,30 +1,33 @@
-/* 
 
-//NOTES : 32 signed integer range -> -2^32  to 2^32-1
-//Approach :
-1) Last digit nikalenge by %10
-2) result me push krenge ( rev * 10 + digit )
-3) push krne se phle check krenge ki overflow na ho mtlb 32-bit me hi rhe 
-*/
+//Approach1 :Bruteforce 
 
 class Solution {
 public:
     int reverse(int x) {
+        int flag = x < 0;
+        long long tempNum =abs((long long)x);// long long me isliye conver kiya kyonki
+        //INT_MIN= -2147483648 positive hokr 2147483648 bn jyega jo ki INT_MAX se ek bada hai to int me nhi ayega
 
-        //if x is less than 0 , aur uska last digit 0 ho pr number 0 na ho 
-        // to bhi woh number palindrome nhi bnega
+        //convert kro string me
+        string s = to_string(tempNum);
 
-        if(x < 0 || x%10 == 0 && x != 0) return false;
-        //loop jbtk chlega jb tk number reversedhalf se bada h0
-        int reversedhalf = 0;
-        while(x>reversedhalf){
-            reversedhalf = reversedhalf*10 + x%10;
-            x/= 10;
+        //reverse kro string ko 
+        std::reverse(s.begin() , s.end());
 
-        }
+        long long ansNum = stoll(s);//reverse hone pr khin range se bahar na ho isliye to tackle overflow
 
+        if(flag) ansNum *= -1;
+
+        //check krenge khin range se bahar to nhi ho gaya
+
+        if(ansNum < INT_MIN || ansNum > INT_MAX) return 0;
+
+        return Num;
     }
 };
+//T.C = O(1)
+//S.C = O(1) 
+
 //Approach 2 : by checking overflow before multiply by 10 
 class Solution {
 public:
@@ -51,4 +54,7 @@ public:
         return rev;
     }
 };
+
+//T.C = O(N)
+//S.C = O(1) 
 
