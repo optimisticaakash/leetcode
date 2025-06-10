@@ -84,3 +84,55 @@ public:
 
 //T.C = O(n*m)= O(n^2)
 //S.c = O(n+m)
+
+//Approach 3 : optimal 
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int n = matrix.size();// no of row
+        int m = matrix[0].size();// no of col
+
+        //col marker = matrix[..][j]   
+        //row marker = matrix[i][0]
+        int col0 = 1;
+        for(int i = 0; i < n;i++){
+            for(int j = 0; j < m; j++){
+                if(matrix[i][j] == 0){
+                    //mark the ith row
+                    matrix[i][0] = 0;
+                    //mark the jth col
+                    if(j != 0)
+                        matrix[0][j] = 0;
+                    else
+                        col0 = 0;
+
+                }
+            }
+        }
+
+        //now mark the nonzero elements 
+        for(int i = 1; i < n; i++){
+            for(int j = 1; j < m; j++){
+                if(matrix[i][j] != 0){
+                    //check for row and col
+                    if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        if(matrix[0][0] == 0){
+            for(int j = 0; j < m; j++) matrix[0][j] = 0;
+        }
+        if(col0 == 0){
+            for(int i = 0; i < n; i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }    
+};
+
+//T.C = O(2*m*n)
+//S.C = O(1)
