@@ -1,18 +1,4 @@
 //Approach1 : Bruteforce 
-/*
-In this approach, for every column from 1 to n, we will calculate the element (n, c)
-(where n is the given row number and c is the column number that will vary from 1 to n) 
-using the previous method. Thus, we will print the row.  
-
-
-steps:
- We will use a loop(say c) to iterate over each column, i.e., from 1 to n. And for each column, we will do the following steps:
-1. First, we will consider n-1 as n and c-1 as r.
-2. After that, we will simply calculate the value of the combination using a loop. 
-3. The loop will run from 0 to r. And in each iteration, we will multiply (n-i) with the result and divide the result by (i+1).
-4. Finally, we will print the element.
-5. Finally, the entire row will be printed.
-*/
 
 //in this approach we are generating element for every row and col and then storing 
 //Code:
