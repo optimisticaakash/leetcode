@@ -1,3 +1,27 @@
+//Approach2 : bruteforce 
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string temp = "";
+
+        //store alpnum character only in lowercase
+        for(char ch : s){
+            if(isalnum(ch)){
+                temp += tolower(ch);
+            }
+        }
+
+        //reverse the string
+        string reversed = temp;
+        reverse(reversed.begin() , reversed.end());
+
+        return reversed == temp;//return true if both are equal otherwise false
+    }
+};
+
+//T.C : O(n) 
+//S.C : O(d) // d = no of alphanumeric character in string
+
 //Approach 1 : use two pointer approach 
 class Solution {
 public:
@@ -34,6 +58,9 @@ public:
     }
 };
 
+//T.C : O(n) 
+//S.C : O(1)
+
 //Approach 2 : recursive approach 
 class Solution {
 public:
@@ -63,3 +90,5 @@ public:
         return isPalindromeHelper(0 , n-1 ,s);
     }
 };
+//T.C : O(n)
+//S.C : O(n) //bcz each recursive call use stack space 
