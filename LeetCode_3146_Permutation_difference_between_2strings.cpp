@@ -1,3 +1,26 @@
+//Approach 0 : bruteforce 
+
+class Solution {
+public:
+    int findPermutationDifference(string s, string t) {
+        int n = s.size();
+        int sum = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(s[i] == t[j]) sum += abs(i - j);
+
+            }
+        }
+
+        return sum;
+    }
+};
+
+//T.C : O (n^2)
+//S.C : O(1) 
+
+
+
 //Approach1: using character hashing using 2vector
 class Solution {
 public:
