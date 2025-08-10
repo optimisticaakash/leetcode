@@ -96,6 +96,33 @@ public:
 
         return answer;
     }
+
+//T.C : O(n)
+//S.C : O(1)
+
+//Approach6: index mapping
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> answer;
+        for(int i = 0; i < n; i++){
+            int num = abs(nums[i]);
+            int idx = num-1;
+            if(nums[idx] < 0){
+                answer.push_back(num);
+            }else{
+                nums[idx] *= -1;
+            }
+        }
+
+        return answer;
+    }
+};
+
+//T.C : O(n)
+//S.C : O(1) 
 };
 
 //T.C : O(n) 
