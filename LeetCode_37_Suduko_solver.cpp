@@ -54,6 +54,67 @@ public:
     }
 };
 
+//Another code 
+class Solution {
+public:
+    bool issafe(vector<vector<char>>& board , int row , int col , char dig){
+        //horizontal
+        for(int j = 0; j < 9; j++){
+            if(board[row][j]==dig) return false;
+        }
+
+        //vertical
+        for(int j = 0; j < 9; j++){
+            if(board[j][col]==dig) return false;
+        }
+
+        //for grid
+        int srow = (row/3)*3;
+        int scol = (col/3)*3;
+        for(int i = srow; i <= srow+2; i++){
+            for(int j = scol; j <= scol+2; j++){
+                if(board[i][j] == dig){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+    bool solvehelper(vector<vector<char>>& board , int row , int col){
+        //base case
+        if(row == 9)return true;
+
+        int nextRow = row;
+        int nextCol = col+1;
+        if(nextCol == 9){
+            nextRow =row+1;
+            nextCol = 0;
+        }
+
+        if(board[row][col] != '.'){
+            return solvehelper(board,nextRow , nextCol);
+        }
+
+        //place digit
+        for(char dig = '1'; dig <= '9'; dig++){
+            
+            if(issafe(board,row,col,dig)){
+                board[row][col]=dig;
+                if(solvehelper(board,nextRow,nextCol)){
+                    return true;
+                }
+                board[row][col]='.';
+            }
+        }
+
+        return false;
+    }
+    void solveSudoku(vector<vector<char>>& board) {
+         solvehelper(board , 0 , 0);
+    }
+};
+
 //T.C : O(9^81) : in worst case 81 cell total whi empty hai to sbke liye 9 optioon
 //O(9^k) k is the no of empty cell
 
