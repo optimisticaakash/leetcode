@@ -103,4 +103,38 @@ public:
     }
 };
 //T.C :O(N) 
-//S.C :O(N) 
+//S.C :O(1) 
+
+//Approach4 : using stack 
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int water = 0;
+
+        stack<int> st;
+        for(int i = 0; i < n; i++){
+            //right boundary milti rhe tbtk
+            while(!st.empty() && height[i] > height[st.top()]){
+                int mid = st.top();
+                st.pop();
+                
+                //left boundary nhi hai 
+                if(st.empty()) break;
+
+                int leftIndex = st.top();
+                int distance = i - leftIndex - 1;
+
+                water += (min(height[leftIndex] , height[i]) - height[mid]) * distance;
+            }
+
+            st.push(i);
+        }
+
+        return water;
+    }
+};
+
+//T.C :O(n)
+//S.C : O(n)
