@@ -127,3 +127,90 @@ public:
 
 //T.c : O(1) in unordered_map insertion deletion takes O(1)
 //S.C :O(2N) map and doubly linkedlist
+
+//T.c: mik using c++stl and ordered_map
+//mik approach ; 
+//using ordered map to store frequency to easily get access of least freq
+//one unordered map to store key and node addrress
+class LFUCache {
+public:
+    int cap;
+    int size;
+    unordered_map<int,list<vector<int>>::iterator> mp;//key ->Address(har ek node ka )
+    map<int,list<vector<int>>>freq;//counter ->{key ,value , counter}
+
+    LFUCache(int capacity) {
+        cap = capacity;
+        size = 0;
+    }
+    void makeMostFrequentlyUsed(int key){
+        auto &vec = *(mp[key]); //vec stores the address of vector  node
+
+        int value = vec[1];
+        int f = vec[2];
+
+        freq[f].erase(mp[key]);//erase kr rhe hai  freq f wale vector se kyonki freq increase hogi to dusre vector me dalenge
+
+        if(freq[f].empty()){//agar freq f vector empty hai to use delete krenge
+            freq.erase(f);
+        }
+
+        f++;
+        freq[f].push_front({key,value,f});
+
+        mp[key]= freq[f].begin();//map me address change kr rhe hai , front me dala to freq[f].begin() hi address dedega
+
+    }
+    
+    int get(int key) {
+        if(mp.find(key) == mp.end()){
+            return -1;
+        }
+        auto vec = (*(mp[key]));//* se vector ka address milgya
+        makeMostFrequentlyUsed(key);
+        int value = vec[1];
+
+        return value;
+    }
+    
+    void put(int key, int value) {
+        if(cap== 0) return;
+
+        if(mp.find(key) != mp.end()){
+            auto &vec = (*(mp[key]));
+            vec[1]= value;
+
+            makeMostFrequentlyUsed(key);
+        }else if(size<cap){
+            size++;
+            freq[1].push_front(vector<int>({key,value,1}));//naya key hai to fresh freq 1 hi hogi 
+            mp[key] = freq[1].begin();
+            
+        }else{//Time to remove LFU , or LRU when there is a tie
+            auto &kaun_sa_list = freq.begin()->second;
+
+            int key_to_delete = (kaun_sa_list.back())[0];
+
+            kaun_sa_list.pop_back();
+
+            if(kaun_sa_list.empty()){
+                freq.erase(freq.begin()-> first);
+            }
+
+            freq[1].push_front(vector<int>({key,value,1}));
+            mp.erase(key_to_delete);
+            mp[key] = freq[1].begin();
+        }
+        
+    }
+};
+
+/**
+ * Your LFUCache object will be instantiated and called as such:
+ * LFUCache* obj = new LFUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+
+//T.C :O(LOgN) for put and get
+//S.c :O(2N )
