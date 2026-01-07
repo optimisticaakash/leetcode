@@ -4,7 +4,7 @@
 class Solution {
 public:
     int reverse(int x) {
-        int flag = x < 0;
+        bool flag = x < 0;
         long long tempNum =abs((long long)x);// long long me isliye conver kiya kyonki
         //INT_MIN= -2147483648 positive hokr 2147483648 bn jyega jo ki INT_MAX se ek bada hai to int me nhi ayega
 
@@ -12,7 +12,8 @@ public:
         string s = to_string(tempNum);
 
         //reverse kro string ko 
-        std::reverse(s.begin() , s.end());
+        std::reverse(s.begin() , s.end());//already reverse naam ka humara function hai 
+                                        //to reverse explicitly call krna padega
 
         long long ansNum = stoll(s);//reverse hone pr khin range se bahar na ho isliye to tackle overflow
 
@@ -22,7 +23,7 @@ public:
 
         if(ansNum < INT_MIN || ansNum > INT_MAX) return 0;
 
-        return Num;
+        return ansNum;
     }
 };
 //T.C = O(1)
