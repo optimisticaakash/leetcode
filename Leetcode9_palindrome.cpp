@@ -19,7 +19,7 @@ public:
 };
 
 
-//approach 1 : by checking overflow condition before multiply rev by 10
+//approach 2 : by checking overflow condition before multiply rev by 10
 
 class Solution {
 public:
@@ -43,7 +43,7 @@ public:
 };
 
 
-//Approach 2 : by reverse half the number and check if it equals half of the number
+//Approach 3 : by reverse half the number and check if it equals half of the number
 //In this approach if rev the number by half , it eliminate the chances of overflow  because reversing the whole number could cause overflow 
 
 //so in this approach we reverse the number till the original number > reversedhalf
