@@ -34,5 +34,21 @@ public:
     }
 };
 
-//T.C : O(n*m)
+
+// 2️⃣ Har diagonal ko sort karna
+// Total diagonals ≈ n + m − 1
+// Agar kisi diagonal ki length k hai → sort = O(k log k)
+// Total cost:
+
+// ∑klogk
+
+// Worst case me:
+// Matrix almost square (n ≈ m)
+// Longest diagonal ≈ min(n, m)
+
+// ➡️ Worst Case = O(n·m·log(min(n,m)))
+
+
+// T.C = O(n·m·log(min(n,m)))
+
 //S.C : O(n*m)
