@@ -26,7 +26,8 @@ public:
         return ansNum;
     }
 };
-//T.C = O(1)
+//T.C = O(d) = O(log10(x))
+
 //S.C = O(1) 
 
 //Approach 2 : by checking overflow before multiply by 10 
