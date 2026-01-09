@@ -63,6 +63,9 @@ public:
 
         while(low <= high){
             int mid = (low + high)/2;
+            // mid se map krne ke liye trick 
+            // row = mid/no of col 
+            //col = mid % no of col
             
             int row = mid/m;
             int col = mid%m;
@@ -75,3 +78,32 @@ public:
     }
 };
 //T.C : O(log(m*n))
+
+
+//Approach4 : Staircase - kabhi down , kabhi left
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+
+
+        int i = 0 ;
+        int j = m-1;//last column
+
+        while(i < n && j >= 0){
+            if(matrix[i][j] > target){
+                j--;
+            }else if(matrix[i][j]  < target){
+                i++;
+            }else{
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
+
+//T.C : O(n+m);
+//S.C : O(1)
