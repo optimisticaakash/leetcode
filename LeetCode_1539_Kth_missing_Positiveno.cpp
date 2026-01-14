@@ -36,3 +36,40 @@ public:
 };
 
 //T.C : O(logN)
+
+
+//Approach 3 : naive appraoch
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int n = arr.size();
+        int num = 1;
+        int i = 0;
+
+        while(i < n && k > 0){
+            if(arr[i] == num){
+                i++;
+            }else{
+                k--;
+            }
+            num++;
+        }
+
+        //if case 
+        //arr = [1,2,3] k = 2
+        // 4 , 5  
+        //so 5 is the 2nd missing number
+
+        while(k>0){
+            num++;
+            k--;
+        }
+
+        return num-1; 
+        //num ko har iteration ke end me increment kiya ja raha hai.
+        // Jab k-th missing milta hai, num already next number par hota hai,
+        // isliye correct missing number num - 1 hota hai."
+    }
+};
+
+//T.C : O(N+K)
