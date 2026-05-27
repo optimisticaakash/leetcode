@@ -90,3 +90,123 @@ public:
 
 //S.C : :O(k*N)
 
+
+//Apporach 3 : using minheap 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class compare{
+    public:
+    bool operator()(ListNode* a , ListNode* b){
+        return a->val > b->val;
+    }
+};
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        priority_queue< ListNode* , vector<ListNode*> , compare> pq;
+
+        int k = lists.size();
+
+        if(k == 0) return NULL;
+
+        //step1 . put heads in minheap
+
+        for(int i = 0;i < k;i++){
+            if(lists[i] != NULL){
+                pq.push(lists[i]);
+            }
+        }
+
+        ListNode* head = NULL;
+        ListNode* tail = NULL;
+
+        while(!pq.empty()){
+            ListNode* top = pq.top();
+            pq.pop();
+
+            if(top->next != NULL){
+                pq.push(top->next);
+            }
+
+            if(head == NULL){
+                //answer is empty
+                head = tail = top;
+            }else{
+                //insert at linked list
+                tail->next = top;
+                tail = top;
+            }
+        }
+
+        return head;
+    }
+};
+
+
+//code2 : 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class compare{
+    public:
+    bool operator()(ListNode* a , ListNode* b){
+        return a->val > b->val;
+    }
+};
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        priority_queue< ListNode* , vector<ListNode*> , compare> pq;
+
+        int k = lists.size();
+
+        if(k == 0) return NULL;
+
+        //step1 . put heads in minheap
+
+        for(int i = 0;i < k;i++){
+            if(lists[i] != NULL){
+                pq.push(lists[i]);
+            }
+        }
+
+        ListNode* dNode = new ListNode(-1);
+        ListNode* temp = dNode;
+
+        while(!pq.empty()){
+            auto top = pq.top();
+            pq.pop();
+
+            if(top->next){
+                pq.push(top->next);
+            }
+
+            temp->next = top;
+            temp = temp->next;
+        }
+        return dNode->next;
+    }
+};
+
+//T.C : O(Nlogk)
+//where N : no of total Nodes
+// K : no of linked list
+
+//S.C : O(K)
